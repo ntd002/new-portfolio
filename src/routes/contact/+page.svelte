@@ -1,0 +1,26 @@
+<svelte:head>
+    <title>Contact me</title>
+</svelte:head>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" type="text/css" href="https://ntd002.github.io/portfolio/style.css">
+    <link rel="stylesheet" type="module" href="https://ntd002.github.io/portfolio/global.js">
+</head>
+<body>
+    <h1>Contact</h1>
+    <form action="mailto:ntd002@ucsd.edu">
+        <label>Subject:
+            <input name="subject" value="Subjective Opinion">
+        </label>
+        <label>Body:
+            <textarea name="body">Ay what's up, I'm the body over here.</textarea>
+        </label>
+        <button>Submit</button>
+    </form>
+</body>
+</html>

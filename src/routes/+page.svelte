@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" class="home">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ntd002: Personal site and portfolio</title>
+    <link rel="stylesheet" type="text/css" href="https://ntd002.github.io/portfolio/style.css">
+</head>
+<body>
+    <h1>Nathaniel Do</h1>
+    <p>I bake, code, and am painting my house.</p>
+    <img class="big_image" src="images/chicken parm.jpg" alt="Chicken Parmesan that looks better than one you've had before">
+</body>
+</html>
