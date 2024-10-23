@@ -1,15 +1,21 @@
+<script>
+    import projects from '$lib/projects.json';
+</script>
+
 <svelte:head>
     <title>Projects</title>
 </svelte:head>
 
 <h1>Projects</h1>
 <div class="projects">
+    {#each projects as p}
     <article>
         <h2>Lorem ipsum dolor sit.</h2>
         <img src="https://vis-society.github.io/labs/2/images/empty.svg" alt="">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est fugiat voluptas optio dignissimos laborum. Temporibus atque libero exercitationem animi deserunt, adipisci quia necessitatibus aperiam tenetur quas ut facilis aliquid officia.</p>
     </article>
-    <article>
+    {/each}
+    <!-- <article>
         <h2>Velit aliquid veniam nemo.</h2>
         <img src="https://vis-society.github.io/labs/2/images/empty.svg" alt="">
         <p>Molestias accusantium optio veniam mollitia, omnis quis sequi voluptatem cumque voluptatum perferendis, ipsam saepe. Totam ipsum repellendus eius enim eligendi id neque dolores harum corrupti, animi voluptatum modi quibusdam minima?</p>
@@ -63,5 +69,5 @@
         <h2>Doloremque iusto ab repellendus!</h2>
         <img src="https://vis-society.github.io/labs/2/images/empty.svg" alt="">
         <p>Sit mollitia, repudiandae fuga a facere sequi adipisci magni quasi molestiae quae accusantium odio, deleniti ipsam officiis aperiam excepturi quas maiores? Doloribus quos sint asperiores hic expedita modi, perspiciatis fugit?</p>
-    </article>
+    </article> -->
 </div>
