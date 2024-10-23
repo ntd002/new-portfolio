@@ -10,9 +10,9 @@
 <div class="projects">
     {#each projects as p}
     <article>
-        <h2>Lorem ipsum dolor sit.</h2>
-        <img src="https://vis-society.github.io/labs/2/images/empty.svg" alt="">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est fugiat voluptas optio dignissimos laborum. Temporibus atque libero exercitationem animi deserunt, adipisci quia necessitatibus aperiam tenetur quas ut facilis aliquid officia.</p>
+        <h2>{p.title}</h2>
+        <img src={p.image} alt="">
+        <p>{p.description}</p>
     </article>
     {/each}
     <!-- <article>
