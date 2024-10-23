@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Contact me</title>
+    <title>Contact Me</title>
 </svelte:head>
 
 <!DOCTYPE html>

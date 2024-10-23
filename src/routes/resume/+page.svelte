@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Resume</title>
+</svelte:head>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

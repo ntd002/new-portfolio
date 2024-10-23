@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Ntd002: Personal site and portfolio</title>
+</svelte:head>
+
 <!DOCTYPE html>
 <html lang="en" class="home">
 <head>

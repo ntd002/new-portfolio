@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Projects</title>
+</svelte:head>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
