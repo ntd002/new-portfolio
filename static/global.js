@@ -19,10 +19,10 @@ function $$(selector, context = document) {
 
 // create a navbar
 let pages = [
-    { url: '', title: 'Home' },
-    { url: 'projects/', title: 'Projects' },
-    { url: 'contact/', title: 'Contact' },
-    { url: 'resume/', title: 'Resumes' },
+    { url: '.', title: 'Home' },
+    { url: 'projects', title: 'Projects' },
+    { url: 'contact', title: 'Contact' },
+    { url: 'resume', title: 'Resumes' },
     { url: 'https://github.com/ntd002', title: 'Github Profile' },
   ];
 
@@ -33,10 +33,7 @@ document.body.prepend(nav);
 for (let p of pages) {
     let url = p.url;
     let title = p.title;
-    if (!ARE_WE_HOME && !url.startsWith('http')) 
-    {
-        url = '../' + url;
-    }
+    
     //create a link
     let a = document.createElement('a');
 
