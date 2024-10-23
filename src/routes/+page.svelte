@@ -14,6 +14,5 @@
     <h1>Nathaniel Do</h1>
     <p>I bake, code, and am painting my house.</p>
     <img class="big_image" src="images/chicken parm.jpg" alt="Chicken Parmesan that looks better than one you've had before">
-    <script type="module" src="https://ntd002.github.io/portfolio/global.js"></script>
 </body>
 </html>

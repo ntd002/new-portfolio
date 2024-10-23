@@ -22,6 +22,5 @@
         </label>
         <button>Submit</button>
     </form>
-    <script type="module" src="https://ntd002.github.io/portfolio/global.js"></script>
 </body>
 </html>
