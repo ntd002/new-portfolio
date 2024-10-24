@@ -14,7 +14,9 @@
 <h3>Latest Projects</h3>
 <div class="projects-highlights">
     {#each projects.slice(0, 3) as p}
+    <article>
         <Project data={p} />
+    </article>
     {/each}
 </div>
 
