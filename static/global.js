@@ -27,32 +27,32 @@ let pages = [
   ];
 
 let nav = document.createElement('nav');
-document.body.prepend(nav);
+// document.body.prepend(nav);
 
 
-for (let p of pages) {
-    let url = p.url;
-    let title = p.title;
+// for (let p of pages) {
+//     let url = p.url;
+//     let title = p.title;
     
-    //create a link
-    let a = document.createElement('a');
+//     //create a link
+//     let a = document.createElement('a');
 
-    a.href = url;
-    a.textContent = title;
-    nav.append(a);
+//     a.href = url;
+//     a.textContent = title;
+//     nav.append(a);
 
-    //current tab is current style
-    if (a.host === location.host && a.pathname === location.pathname) 
-    {
-        a.classList.add('current');
-    }
-    //making github profile target=blank
-    if (url === 'https://github.com/ntd002')
-    {
-        a.target = "_blank"
-    }
+//     //current tab is current style
+//     if (a.host === location.host && a.pathname === location.pathname) 
+//     {
+//         a.classList.add('current');
+//     }
+//     //making github profile target=blank
+//     if (url === 'https://github.com/ntd002')
+//     {
+//         a.target = "_blank"
+//     }
 
-}
+// }
 
 //light/dark mode selector
 document.body.insertAdjacentHTML(
