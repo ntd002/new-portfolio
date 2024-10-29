@@ -100,8 +100,3 @@ div.resumes {
   grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
 }
 
-label.color-scheme {
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
-}

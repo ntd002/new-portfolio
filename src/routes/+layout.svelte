@@ -8,6 +8,17 @@
     { url: './resume', title: 'Resume' },
     { url: 'https://github.com/ntd002', title: 'Github Profile', },
     ];
+
+    let localStorage = globalThis.localStorage ?? {};
+    $: localStorage.colorScheme = colorScheme;
+
+    let colorScheme = localStorage.colorScheme ?? 'light dark';
+
+    let root = globalThis?.document?.documentElement;
+    $: root?.style.setProperty('color-scheme', colorScheme);
+
+    
+    
 </script>
 
 <nav>
@@ -17,6 +28,15 @@
         </a>
     {/each}
 </nav>
+
+<label class="color-scheme">
+    Theme:
+    <select bind:value={ colorScheme }>
+          <option value="light dark">--Automatic--</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+    </select>
+</label>
 <slot />
 
 <style>
@@ -47,5 +67,11 @@
     border-bottom-width: 0.4em;
     border-bottom-style: solid;
     border-bottom-color: oklch(90% 3% 200);
+    }
+
+    label.color-scheme {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
     }
 </style>
