@@ -17,7 +17,8 @@
     let root = globalThis?.document?.documentElement;
     $: root?.style.setProperty('color-scheme', colorScheme);
 
-    
+
+    let profileData = fetch('https://api.github.com/users/ntd002');
     
 </script>
 
