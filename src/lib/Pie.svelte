@@ -24,8 +24,16 @@
     // let arcs = arcData.map((d) => arcGenerator(d));
 
 
-    let data = [1, 2, 3, 4, 5, 5];
-    let sliceGenerator = d3.pie();
+    let data = [
+    { value: 1, label: 'apples' },
+    { value: 2, label: 'oranges' },
+    { value: 3, label: 'mangos' },
+    { value: 4, label: 'pears' },
+    { value: 5, label: 'limes' },
+    { value: 5, label: 'cherries' },
+    ];
+
+    let sliceGenerator = d3.pie().value((d) => d.value);
     let arcData = sliceGenerator(data);
     let arcs = arcData.map((d) => arcGenerator(d));
 
@@ -39,6 +47,15 @@
     {/each}
 </svg>
 
+<ul class="legend">
+    {#each data as d, index}
+    <li style="--color: { colors(index) }">
+      <span class="swatch"></span>
+      {d.label} <em>({d.value})</em>
+    </li>
+    {/each}
+</ul>
+
 <style>
     svg{
     max-width: 20em;
@@ -47,4 +64,36 @@
     /* Do not clip shapes outside the viewBox */
     overflow: visible;
     }
+
+    ul {
+        width: 100%;
+        height: 5em;
+        background-color:#D9D5C9;
+        border-radius: 10px;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+    }
+    li {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        padding-left: 10px;  /* Add space for custom marker */
+        position: relative;
+    }
+
+    li::before {
+    content: '';            /* Custom bullet */
+    position: absolute;
+    left: 0;                /* Place the bullet at the beginning of the list item */
+    top: 50%;               /* Vertically center the bullet */
+    transform: translateY(-50%);
+    width: 8px;             /* Bullet size */
+    height: 8px;            /* Bullet size */
+    background-color: var(--color); /* Bullet color */
+    border-radius: 50%;     /* Make the bullet circular */
+    }
+
+
 </style>
