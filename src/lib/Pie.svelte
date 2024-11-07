@@ -41,22 +41,34 @@
 
 </script>
 
-<svg viewBox="-50 -50 100 100">
-    {#each arcs as arc, i}
-    <path d="{arc}" fill="{colors(i)}" />
-    {/each}
-</svg>
+<div class="container">
+    <svg viewBox="-50 -50 100 100">
+        {#each arcs as arc, i}
+        <path d="{arc}" fill="{colors(i)}" />
+        {/each}
+    </svg>
+    
+    <ul class="legend">
+        {#each data as d, index}
+        <li style="--color: { colors(index) }">
+          <span class="swatch"></span>
+          {d.label} <em>({d.value})</em>
+        </li>
+        {/each}
+    </ul>
+</div>
 
-<ul class="legend">
-    {#each data as d, index}
-    <li style="--color: { colors(index) }">
-      <span class="swatch"></span>
-      {d.label} <em>({d.value})</em>
-    </li>
-    {/each}
-</ul>
+
 
 <style>
+    .container{
+        /* display: flex; 
+        justify-content: space-between; */
+        display: grid; 
+        grid-template-columns: repeat(2, auto);
+        gap: 20px;
+    }
+
     svg{
     max-width: 20em;
     margin-block: 2em;
@@ -67,12 +79,13 @@
 
     ul {
         width: 100%;
-        height: 5em;
+        height: 10em;
         background-color:#D9D5C9;
         border-radius: 10px;
 
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+        overflow: hidden;
     }
     li {
         display: flex;
@@ -84,15 +97,15 @@
     }
 
     li::before {
-    content: '';            /* Custom bullet */
-    position: absolute;
-    left: 0;                /* Place the bullet at the beginning of the list item */
-    top: 50%;               /* Vertically center the bullet */
-    transform: translateY(-50%);
-    width: 8px;             /* Bullet size */
-    height: 8px;            /* Bullet size */
-    background-color: var(--color); /* Bullet color */
-    border-radius: 50%;     /* Make the bullet circular */
+        content: '';            /* Custom bullet */
+        position: absolute;
+        left: 0;                /* Place the bullet at the beginning of the list item */
+        top: 50%;               /* Vertically center the bullet */
+        transform: translateY(-50%);
+        width: 8px;             /* Bullet size */
+        height: 8px;            /* Bullet size */
+        background-color: var(--color); /* Bullet color */
+        border-radius: 50%;     /* Make the bullet circular */
     }
 
 
