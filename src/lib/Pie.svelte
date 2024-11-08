@@ -36,19 +36,28 @@
 
     let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
+    //selecting wedge
+    export let selectedIndex = -1;
+        
 </script>
 
 <div class="container">
     <svg viewBox="-50 -50 100 100">
-        {#each arcs as arc, i}
-        <path d="{arc}" fill="{colors(i)}" />
+        {#each arcs as arc, index} 
+            <path d={arc} fill={ colors(index)} 
+            class:selected={selectedIndex === index} 
+            on:click={
+                e => selectedIndex = selectedIndex === index ? -1 : index
+            }/> 
+            <!--  -->
         {/each}
     </svg>
     
     <ul class="legend">
         {#each data as d, index}
         <li style="--color: { colors(index) }">
-          <span class="swatch"></span>
+          <span class="swatch" class:selected={selectedIndex === index}></span>
+          <!--  -->
           {d.label} <em>({d.value})</em>
         </li>
         {/each}
@@ -105,5 +114,26 @@
         border-radius: 50%;     /* Make the bullet circular */
     }
 
+    svg:hover {
+        path:not(:hover) {
+            opacity: 50%;
+        }
+    }
+    path {
+        transition: 300ms;
+        cursor: pointer;
+    }
+
+    /* path:not(:hover) {
+        opacity: 50%;
+    } */
+    
+    .selected {
+    --color: oklch(60% 45% 0) !important;
+
+    &:is(path) {
+        fill:#18864B;
+        }
+    }
 
 </style>
