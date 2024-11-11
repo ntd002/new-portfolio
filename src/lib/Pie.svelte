@@ -38,6 +38,12 @@
 
     //selecting wedge
     export let selectedIndex = -1;
+    function toggleWedge(index, event) {
+        if (!event.key || event.key === 'Enter') {
+        selectedIndex = index;
+        }
+    }
+
         
 </script>
 
@@ -46,10 +52,12 @@
         {#each arcs as arc, index} 
             <path d={arc} fill={ colors(index)} 
             class:selected={selectedIndex === index} 
-            on:click={
-                e => selectedIndex = selectedIndex === index ? -1 : index
-            }/> 
-            <!--  -->
+            on:click={e => toggleWedge(index, e)}
+            on:keyup={e => toggleWedge(index, e)}
+            tabIndex="0"
+            role="button"
+            aria-label
+            /> 
         {/each}
     </svg>
     
@@ -114,14 +122,15 @@
         border-radius: 50%;     /* Make the bullet circular */
     }
 
-    svg:hover {
-        path:not(:hover) {
+    svg:has(path:hover, path:focus-visible) {
+        path:not(:hover):not(:focus-visible) {
             opacity: 50%;
         }
     }
     path {
         transition: 300ms;
         cursor: pointer;
+        outline: none;
     }
 
     /* path:not(:hover) {

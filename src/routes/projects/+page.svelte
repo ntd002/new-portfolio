@@ -29,6 +29,21 @@
         return values.includes(query.toLowerCase());
     });
 
+    //filtering data when clicking pie
+    let selectedYearIndex = -1;
+    let selectedYear;
+    $: selectedYear =
+    selectedYearIndex > -1 ? pieData[selectedYearIndex].label : null;
+    
+    let filteredByYear;
+    $: filteredByYear = projects.filter((project) => {
+        if (selectedYear) {
+            return project.year === selectedYear;
+        }
+
+        return true;
+        });
+
 </script>
 
 <svelte:head>
@@ -36,7 +51,7 @@
 </svelte:head>
 
 <h1>{ projects.length } Projects</h1>
-<Pie data="{pieData}"/>
+<Pie data="{pieData}" bind:selectedIndex="{selectedYearIndex}"/>
 
 <input
   type="search"
@@ -46,7 +61,7 @@
 />
 
 <div class="projects">
-    {#each filteredProjects as p}
+    {#each filteredByYear as p}
     <article>
         <!-- <h2>{p.title}</h2>
         <img src={p.image} alt="">
