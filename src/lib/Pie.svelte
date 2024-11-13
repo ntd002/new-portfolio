@@ -122,11 +122,22 @@
         border-radius: 50%;     /* Make the bullet circular */
     }
 
-    svg:has(path:hover, path:focus-visible) {
-        path:not(:hover):not(:focus-visible) {
+    svg:has(path:hover,  path:focus-visible) {
+        path:not(:hover, :focus-visible) {
             opacity: 50%;
         }
     }
+    /* svg:has(path:hover, path:focus-visible) {
+    path:not(:hover):not(:focus-visible) {
+        opacity: 0.5;
+    }
+    } */
+
+
+
+
+
+
     path {
         transition: 300ms;
         cursor: pointer;
