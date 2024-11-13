@@ -4,6 +4,10 @@
 
     let data = [];
     let commits = [];
+    let longLine = 0;
+    $: longLine = d3.max(data, d => d.length)
+    let numFiles = 0;
+    $: numFiles = d3.group(data, d => d.file).size;
 
     onMount(async () => {
         data = await d3.csv('loc.csv', (row) => ({
@@ -44,7 +48,9 @@
             return ret;
         });
 
-        console.log(commits);
+        
+
+        console.log(data);
     });
 </script>
 
@@ -63,7 +69,7 @@
     </div>
     <div>
         <dt>Files</dt>
-        <dd>{data.length}</dd>
+        <dd>{numFiles}</dd>
     </div>
     <div>
         <!-- Correct -->
@@ -72,7 +78,7 @@
     </div>
     <div>
         <dt>Longest Line</dt>
-        <dd>{d3.max(data, d => d.depth)}</dd>
+        <dd>{longLine}</dd>
     </div>
 </dl>
 

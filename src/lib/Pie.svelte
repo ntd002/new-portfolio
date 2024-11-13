@@ -40,11 +40,11 @@
     export let selectedIndex = -1;
     function toggleWedge(index, event) {
         if (!event.key || event.key === 'Enter') {
-        selectedIndex = index;
+        selectedIndex = selectedIndex === index ? -1 : index;
         }
     }
 
-        
+    let hoveredIndex = -1;
 </script>
 
 <div class="container">
@@ -52,6 +52,11 @@
         {#each arcs as arc, index} 
             <path d={arc} fill={ colors(index)} 
             class:selected={selectedIndex === index} 
+            style="opacity: {hoveredIndex === -1 || hoveredIndex === index ? 1 : 0.5};"
+            on:mouseenter={() => hoveredIndex = index}
+            on:focus={() => hoveredIndex = index}
+            on:blur={() => hoveredIndex = -1}
+            on:mouseleave={() => hoveredIndex = -1}
             on:click={e => toggleWedge(index, e)}
             on:keyup={e => toggleWedge(index, e)}
             tabIndex="0"
@@ -122,11 +127,33 @@
         border-radius: 50%;     /* Make the bullet circular */
     }
 
-    svg:has(path:hover,  path:focus-visible) {
+    /* svg:has(path:hover) {
+        path:not(:hover) {
+            opacity: 50%;
+        }
+    } */
+
+    /* works but any area of svg highlighted */
+    /* svg:hover{
+        path:not(:hover) {
+            opacity: 50%;
+        }
+    } */
+
+    /* works but stays grayed out without overing */
+    /* svg{
         path:not(:hover, :focus-visible) {
             opacity: 50%;
         }
-    }
+    } */
+
+    /* Lab */
+    /* svg:has(path:hover,  path:focus-visible) {
+        path:not(:hover, :focus-visible) {
+            opacity: 50%;
+        }
+    } */
+     /* ChatGPT */
     /* svg:has(path:hover, path:focus-visible) {
     path:not(:hover):not(:focus-visible) {
         opacity: 0.5;
