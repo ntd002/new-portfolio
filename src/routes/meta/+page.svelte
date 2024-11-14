@@ -149,7 +149,48 @@
         .scaleSqrt()
         .domain(d3.extent(data, (d) => d.length))
         .range([2,30]);
+    
+    //brush
+    let svg;
+    let brushSelection;
+    let brushedID;
+    $: {
+        d3.select(svg).call(d3.brush().on('start brush end', brushed));
+        d3.select(svg).selectAll('.dots, .overlay ~ *').raise();
+    }
+    function brushed(evt) {
+        brushSelection = evt.selection;
+    }
+    function isCommitSelected(commit) {
+        if (!brushSelection) {
+            return false;
+        }
+        let min = { x: brushSelection[0][0], y: brushSelection[0][1] };
+        let max = { x: brushSelection[1][0], y: brushSelection[1][1] };
+        let x = xScale(commit.date);
+        let y = yScale(commit.hourFrac);
 
+        return x >= min.x && x <= max.x && y >= min.y && y <= max.y;
+    }
+    $: selectedCommits = brushSelection ? commits.filter(isCommitSelected) : [];
+    $: hasSelection = brushSelection && selectedCommits.length > 0;
+
+    $: {
+        brushedID = selectedCommits.map(item => item.id);
+        
+        d3.selectAll("circle")
+        .each(function() {
+            const circleId = this.id; // Get the ID of the current circle
+            const isSelected = brushedID.includes(circleId); // Check if ID is in the selected array
+
+            if (isSelected) {
+                d3.select(this).attr("fill", "tomato");  // Add the 'selected' class
+            } else {"#F16456"
+                d3.select(this).attr("fill", "steelblue"); // Remove the 'selected' class
+            }
+        });
+    }
+    
 </script>
 
 
@@ -181,7 +222,7 @@
 </dl>
 
 <h2>Commits by time of day</h2>
-<svg viewBox="0 0 {width} {height}">
+<svg bind:this={svg} viewBox="0 0 {width} {height}">
     <g
     class="gridlines"
     transform="translate({usableArea.left}, 0)"
@@ -192,6 +233,7 @@
     <g class="dots">
         {#each commits as commit, index }
         <circle
+          id="{commit.id}"
           cx="{xScale(commit.datetime)}"
           cy="{yScale(commit.hourFrac)}"
           r="{rScale(commit.totalLines)}"
@@ -208,6 +250,7 @@
         {/each}
       </g>
 </svg>
+<p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
 <dl id="commit-tooltip" 
 class="info tooltip" 
 hidden={hoveredIndex === -1} 
@@ -303,7 +346,19 @@ bind:this="{commitTooltip}"
             transform: scale(1.5);
             fill-opacity: 100%;
         }
+    }
 
-        
+    @keyframes marching-ants {
+        to {
+            stroke-dashoffset: -8; /* 5 + 3 */
+        }
+    }
+
+    svg :global(.selection) {
+    fill-opacity: 10%;
+    stroke: black;
+    stroke-opacity: 70%;
+    stroke-dasharray: 5 3;
+    animation: marching-ants 2s linear infinite;
     }
 </style>
