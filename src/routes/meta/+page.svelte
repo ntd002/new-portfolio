@@ -51,7 +51,7 @@
 
         
 
-        // console.log(data);
+        commits = d3.sort(commits, (d) => -d.totalLines);
     });
 
     //scatterplot
@@ -142,9 +142,14 @@
         } else if (evt.type === 'mouseleave' || evt.type === 'blur') {
             hoveredIndex = -1;
         }
-
-        
     }
+
+    //dot size
+    $: rScale = d3  
+        .scaleSqrt()
+        .domain(d3.extent(data, (d) => d.length))
+        .range([2,30]);
+
 </script>
 
 
@@ -185,16 +190,11 @@
     <g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
     <g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
     <g class="dots">
-        {console.log(commits.length)}
         {#each commits as commit, index }
         <circle
-          cx="{
-          xScale(commit.datetime)
-          }"
-          cy="{
-          yScale(commit.hourFrac)
-          }"
-          r="5"
+          cx="{xScale(commit.datetime)}"
+          cy="{yScale(commit.hourFrac)}"
+          r="{rScale(commit.totalLines)}"
           fill="steelblue"
           on:mouseenter={evt => dotInteraction(index, evt)} 
           on:mouseleave={evt => dotInteraction(index, evt)}
@@ -298,8 +298,12 @@ bind:this="{commitTooltip}"
         transition: 200ms;
         transform-origin: center;
         transform-box: fill-box;
+        fill-opacity: 70%;
         &:hover {
             transform: scale(1.5);
+            fill-opacity: 100%;
         }
+
+        
     }
 </style>
