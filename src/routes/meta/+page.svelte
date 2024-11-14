@@ -2,6 +2,7 @@
     import * as d3 from 'd3';
     import { onMount } from 'svelte';
     import { computePosition, autoPlacement, offset } from '@floating-ui/dom';
+    import Pie from '$lib/Pie.svelte';
 
     let data = [];
     let commits = [];
@@ -190,7 +191,20 @@
             }
         });
     }
-    
+
+    //language breakdown
+    let selectedLines;
+    let languageBreakdown;
+    let pieData;
+    $: selectedLines = (hasSelection ? selectedCommits : commits).flatMap(
+        (d) => d.lines,
+        );
+    $: languageBreakdown = d3.rollups(
+        selectedLines,
+        (v) => v.length,
+        (d) => d.type,
+        );
+    $: pieData = Array.from(languageBreakdown).map(([language, lines]) => ({label: language, value: lines+" lines"}));
 </script>
 
 
@@ -251,6 +265,18 @@
       </g>
 </svg>
 <p>{hasSelection ? selectedCommits.length : "No"} commits selected</p>
+<Pie data={pieData} />
+<dl class="language">
+    {#each languageBreakdown as [language, lines] }
+        <div class="language">
+            <dt>{language}</dt>
+            <dd>{lines} lines ({(lines*100 / selectedLines.length).toFixed(2)}%)</dd>
+        </div>
+    {/each}
+</dl>
+
+
+
 <dl id="commit-tooltip" 
 class="info tooltip" 
 hidden={hoveredIndex === -1} 
@@ -361,4 +387,18 @@ bind:this="{commitTooltip}"
     stroke-dasharray: 5 3;
     animation: marching-ants 2s linear infinite;
     }
+
+    dl.language {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    div.language > dt {
+        font-size: 1em;
+        color: #8E94A3;
+    }
+    div.language > dd {
+        font-size: 1em;
+        font-weight: 500;
+    }
+    
 </style>
