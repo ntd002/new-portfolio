@@ -204,7 +204,7 @@
         (v) => v.length,
         (d) => d.type,
         );
-    $: pieData = Array.from(languageBreakdown).map(([language, lines]) => ({label: language, value: lines+" lines"}));
+    $: pieData = Array.from(languageBreakdown).map(([language, lines]) => ({label: language, value: lines}));
 </script>
 
 
