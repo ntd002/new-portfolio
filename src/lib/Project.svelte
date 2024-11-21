@@ -4,7 +4,7 @@
 </script>
 
 <article>
-    <svelte:element this={'h' + hLevel}>{data.title}</svelte:element>   
+    <svelte:element this={'h' + hLevel}><a href={data.url} target=_blank>{data.title}</a></svelte:element>   
     <img src={data.image} alt="">
     <div>
         <p>{data.description}</p>
@@ -13,6 +13,9 @@
 </article>
 
 <style>
+    a {
+        padding: 0px;
+    }
     .year { 
         font-weight: bold;
         font-variant-numeric: oldstyle-nums;
